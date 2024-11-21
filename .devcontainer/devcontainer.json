@@ -7,8 +7,8 @@
 
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2.12.0": {
-			//"version": "20.10",
-			//"dockerDashComposeVersion": "",
+			"version": "27.3.1-1~ubuntu.24.04~noble",
+			"dockerDashComposeVersion": "v2.30.3",
 			"enableNonRootDocker": "true",
 			"moby": "false",
 			"azureDnsAutoDetection": "false"
@@ -41,10 +41,10 @@
 			"version": "v3.9.1"
 		},
 		"ghcr.io/devcontainers-contrib/features/age:1.0.15": {
-			"version": "v1.2.0"
+			"version": "v1.1.1"
 		},
 		"ghcr.io/devcontainers-contrib/features/age-keygen:1.0.14": {
-			"version": "v1.2.0"
+			"version": "v1.1.1"
 		}
 	},
 
