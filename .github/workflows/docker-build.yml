@@ -24,11 +24,16 @@ jobs:
       image: ${{ steps.nextcloud.image }}
       tag: ${{ steps.nextcloud.tag }}
     steps:
-      - name: Get Latest Nextcloud version
+      # - name: Get Latest Nextcloud version
+      #   id: nextcloud
+      #   uses: shrink/actions-docker-latest-image@v1
+      #   with:
+      #     repository: nextcloud:fpm-alpine
+      - name: Get nextcloud version
+        uses: luoqiz/docker-images-latest-version@master
         id: nextcloud
-        uses: shrink/actions-docker-latest-image@v1
         with:
-          repository: nextcloud:fpm-alpine
+          image: nextcloud:fpm-alpine
 
   docker_build:
     runs-on: ubuntu-latest
