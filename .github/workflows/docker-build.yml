@@ -33,7 +33,7 @@ jobs:
         uses: luoqiz/docker-images-latest-version@master
         id: nextcloud
         with:
-          image: nextcloud:fpm-alpine
+          image: nextcloud
 
   docker_build:
     runs-on: ubuntu-latest
