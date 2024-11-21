@@ -28,7 +28,7 @@ jobs:
         id: nextcloud
         uses: shrink/actions-docker-latest-image@v1
         with:
-          repository: nextcloud
+          repository: nextcloud:fpm-alpine
 
   docker_build:
     runs-on: ubuntu-latest
