@@ -21,8 +21,7 @@ jobs:
   version:
     runs-on: ubuntu-latest
     outputs:
-      image: ${{ steps.nextcloud.image }}
-      tag: ${{ steps.nextcloud.tag }}
+      tag: ${{ steps.nextcloud.outputs.tag }}
     steps:
       # - name: Get Latest Nextcloud version
       #   id: nextcloud
@@ -30,10 +29,12 @@ jobs:
       #   with:
       #     repository: nextcloud:fpm-alpine
       - name: Get nextcloud version
-        uses: luoqiz/docker-images-latest-version@master
         id: nextcloud
-        with:
-          image: nextcloud
+        shell: bash
+        run: |
+          tag=$(docker manifest inspect -v nextcloud:fpm-alpine | \
+            jq -r '.[] | select(.Descriptor.platform.os == "linux" and .Descriptor.platform.architecture == "amd64") | .OCIManifest.annotations["org.opencontainers.image.version"]')
+          echo "tag=$tag" >> $GITHUB_OUTPUT
 
   docker_build:
     runs-on: ubuntu-latest
