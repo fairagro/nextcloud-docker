@@ -55,7 +55,6 @@ jobs:
   docker_build:
     runs-on: ubuntu-latest
     needs:
-      - nextcloud_version
       - project_version
     steps:
       - name: Checkout git repo
