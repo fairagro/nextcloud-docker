@@ -65,17 +65,17 @@ jobs:
     needs:
       - project_version
     outputs:
-      does_not_exist: ${{ steps.check.outputs.does_not_exist }}
+      exists: ${{ steps.check.outputs.exists }}
     steps:
       - id: check
         name: Check if image already exists of dockerhub
         shell: bash
         run: |
           curl -I -L --fail "https://hub.docker.com/v2/repositories/zalf/fairagro-nextcloud-docker/tags/${{ needs.project_version.outputs.tag }}"
-          does_not_exist=$?
+          exists=$(( $? == 0 ))
           echo "::notice please ignore any errors"
-          echo "::notice does_not_exist=$does_not_exist (0=does exist, otherwise=does not exist)"
-          echo "does_not_exist=$does_not_exist" >> $GITHUB_OUTPUT
+          echo "::notice exists=$exists"
+          echo "exists=$exists" >> $GITHUB_OUTPUT
         continue-on-error: true
 
   docker_build:
@@ -83,7 +83,7 @@ jobs:
     needs:
       - project_version
       - check_tag
-    if: ${{ needs.check_tag.outputs.does_not_exist != 0 }}
+    if: ${{ !needs.check_tag.outputs.exists }}
     steps:
       - name: Checkout git repo
         uses: actions/checkout@v4.2.2
