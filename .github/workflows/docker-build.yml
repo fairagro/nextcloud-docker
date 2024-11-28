@@ -66,6 +66,9 @@ jobs:
           git config --global user.name "Github Pipeline"
           git tag -a v${{ steps.gitversion.outputs.SemVer }} -m "release ${{ steps.gitversion.outputs.SemVer }}"
           git push origin v${{ steps.gitversion.outputs.SemVer }}
+        # In case there have been no changes since the last build, the version number is not increased,
+        # this the line above try to push the same tag a second time, which will fail.
+        continue-on-error: true
 
   docker_build:
     runs-on: ubuntu-latest
