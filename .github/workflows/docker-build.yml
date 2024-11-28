@@ -11,6 +11,8 @@ on:
   pull_request:
     branches:
       - "main"
+  schedule:
+    - cron: "0 2 * * *"
   # For manual triggering
   workflow_dispatch:
 
