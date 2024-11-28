@@ -5,5 +5,5 @@ LABEL version=${NEXTCLOUD_VERSION}
 RUN set -ex; \
     apk add --no-cache \
         postgresql16-client=16.6-r0 \
-        imagemagick-svg \
-        bzip2-dev
+        imagemagick-svg=7.1.1.32-r0 \
+        bzip2-dev=1.0.8-r6
