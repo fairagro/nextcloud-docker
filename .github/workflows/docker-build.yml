@@ -54,6 +54,7 @@ jobs:
           git config --global user.name "Github Pipeline"
           git tag -a v${{ steps.gitversion.outputs.SemVer }} -m "release ${{ steps.gitversion.outputs.SemVer }}"
           git push origin v${{ steps.gitversion.outputs.SemVer }}
+          echo "::notice please ignore any errors"
         # In case there have been no changes since the last build, the version number is not increased,
         # this the line above try to push the same tag a second time, which will fail.
         continue-on-error: true
@@ -83,6 +84,6 @@ jobs:
           push: true
           tags: |
             zalf/fairagro-nextcloud-docker:latest
-            zalf/fairagro-nextcloud-docker:${{ needs.project_version.outputs.MajorMinorPatch }}-nextcloud-${{ needs.nextcloud_version.outputs.tag }}
+            zalf/fairagro-nextcloud-docker:${{ needs.project_version.outputs.MajorMinorPatch }}+nc-${{ needs.nextcloud_version.outputs.tag }}
           # labels: nice to have
           build-args: NEXTCLOUD_VERSION=${{ inputs.nextcloud_version }}
