@@ -10,7 +10,13 @@ on:
       nextcloud_version:
         description: "Nextcloud version to use"
         required: true
-        default: "28.0.12"
+        default: "28.0.12-fpm-alpine"
+  workflow_call:
+    inputs:
+      nextcloud_version:
+        description: "Nextcloud version to use"
+        required: true
+        type: string
 
 permissions:
   contents: read
