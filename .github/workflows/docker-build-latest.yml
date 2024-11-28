@@ -16,9 +16,6 @@ on:
   # For manual triggering
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
   nextcloud_version:
     runs-on: ubuntu-latest
@@ -37,6 +34,8 @@ jobs:
           echo "tag=$tag" >> $GITHUB_OUTPUT
 
   docker_build_call:
+    permissions:
+      contents: write # needed as git tags are created
     needs:
       - nextcloud_version
     name: call workflow docker-build
