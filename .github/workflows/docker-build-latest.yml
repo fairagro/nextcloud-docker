@@ -42,3 +42,4 @@ jobs:
     uses: ./.github/workflows/docker-build.yml
     with:
       nextcloud_version: ${{ needs.nextcloud_version.outputs.tag }}
+    secrets: inherit
