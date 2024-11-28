@@ -40,6 +40,7 @@ jobs:
       contents: write # so we're allowed to push the new tag
     outputs:
       SemVer: ${{ steps.gitversion.outputs.SemVer }}
+      MajorMinorPatch: ${{ steps.gitversion.outputs.MajorMinorPatch }}
       Major: ${{ steps.gitversion.outputs.Major }}
       Minor: ${{ steps.gitversion.outputs.Minor }}
       Patch: ${{ steps.gitversion.outputs.Patch }}
@@ -99,6 +100,6 @@ jobs:
           push: true
           tags: |
             zalf/fairagro-nextcloud-docker:latest
-            zalf/fairagro-nextcloud-docker:${{ needs.project_version.outputs.SemVer }}-nextcloud-${{ needs.nextcloud_version.outputs.tag }}
+            zalf/fairagro-nextcloud-docker:${{ needs.project_version.outputs.MajorMinorPatch }}-nextcloud-${{ needs.nextcloud_version.outputs.tag }}
           # labels: nice to have
           build-args: NEXTCLOUD_VERSION=${{ needs.nextcloud_version.outputs.tag }}
