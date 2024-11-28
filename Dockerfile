@@ -2,8 +2,12 @@
 ARG NEXTCLOUD_VERSION=fpm-alpine
 FROM nextcloud:${NEXTCLOUD_VERSION}
 LABEL version=${NEXTCLOUD_VERSION}
+# Unfortunately we're unable to pin package versions as they're
+# depending on the underlying alpine version. This alpine version
+# may change depending on the nextcloud version and we need to
+# be able to build the docker image on different nextcloud versions.
 RUN set -ex; \
     apk add --no-cache \
-        postgresql16-client=16.6-r0 \
-        imagemagick-svg=7.1.1.32-r2 \
-        bzip2-dev=1.0.8-r6
+        postgresql16-client \
+        imagemagick-svg \
+        bzip2-dev
