@@ -1,5 +1,45 @@
-# nextcloud-docker
-Our own flavor of a nextcloud docker image
+# nextcloud-docker #
+
+Our own flavor of the nextcloud docker image. It takes the
+[official fpm-alpine docker image](https://hub.docker.com/_/nextcloud/) and installs further packages to enable the use
+the the 'Backup' App and to remove several warnings shown by netxcloud.
+
+There are github workflows that automatically build the image and publish them on
+[Dockerhub](https://hub.docker.com/repository/docker/zalf/fairagro-nextcloud-docker/general) whenever a new netxcloud
+image is published.
+
+## Note on Versioning ##
+
+This repo uses [Semantic Versioning](https://semver.org/). Every commit to the main branch will be tagged with a
+version number of the form `v1.2.3`, where '1' is the major version, '2' the minor version and '3' the patch level.
+
+The tool [`GitVersion`](https://gitversion.net/) is used to automatically create new versions. It is triggered by the
+`Docker Build` workflow that also actually creates the git tags. To define how to increase the version, `GitVersion`
+is configured to interpret [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). So you are expected
+to write commit messages that conform to this spec.
+
+A conventional commit message looks like this:
+
+```text
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Allowed types are: 'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'style', 'refactor', 'perf' and 'test'.
+Each type denotes a corresponding change. All types except 'feat' (for feature) will induce an increase of the patch level,
+whereas 'feat' will increase the minor version.
+
+To increase the major version, you have to add a '!' to the type or add this to the footer:
+
+```text
+BREAKING CHANGE: <description>
+```
+
+The scope denotes the part of your project you're working on -- e.g 'frontend', 'backend', 'parser', etc. Currently there are no defined scopes
+for this repo.
 
 ## Test build and run ##
 
