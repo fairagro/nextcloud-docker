@@ -4,4 +4,6 @@ FROM nextcloud:${NEXTCLOUD_VERSION}
 LABEL version=${NEXTCLOUD_VERSION}
 RUN set -ex; \
     apk add --no-cache \
-        postgresql16-client=16.6-r0
+        postgresql16-client=16.6-r0 \
+        imagemagick-svg \
+        bzip2-dev
