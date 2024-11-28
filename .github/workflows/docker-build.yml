@@ -72,7 +72,9 @@ jobs:
         shell: bash
         run: |
           does_not_exist=$(curl -I -L --fail "https://hub.docker.com/v2/repositories/zalf/fairagro-nextcloud-docker/tags/${{ needs.project_version.outputs.tag }}")
+          echo "::notice please ignore any errors"
           echo "does_not_exist=$does_not_exist" >> $GITHUB_OUTPUT
+        continue-on-error: true
 
   docker_build:
     runs-on: ubuntu-latest
