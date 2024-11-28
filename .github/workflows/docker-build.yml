@@ -71,8 +71,10 @@ jobs:
         name: Check if image already exists of dockerhub
         shell: bash
         run: |
-          does_not_exist=$(curl -I -L --fail "https://hub.docker.com/v2/repositories/zalf/fairagro-nextcloud-docker/tags/${{ needs.project_version.outputs.tag }}")
+          curl -I -L --fail "https://hub.docker.com/v2/repositories/zalf/fairagro-nextcloud-docker/tags/${{ needs.project_version.outputs.tag }}"
+          does_not_exist=$?
           echo "::notice please ignore any errors"
+          echo "does_not_exist=$does_not_exist (0=does exist, otherwise=does not exist)"
           echo "does_not_exist=$does_not_exist" >> $GITHUB_OUTPUT
         continue-on-error: true
 
