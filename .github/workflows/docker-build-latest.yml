@@ -43,3 +43,5 @@ jobs:
     steps:
       - name: call workflow docker-build
         uses: ./.github/workflows/docker-build.yml
+        with:
+          nextcloud_version: ${{ needs.nextcloud_version.outputs.tag }}
