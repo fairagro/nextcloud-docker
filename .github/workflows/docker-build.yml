@@ -63,6 +63,6 @@ jobs:
         with:
           context: "${{ github.workspace }}"
           push: true
-          tags: latest
+          tags: zalf/fairagro-nextcloud-docker:latest
           # labels: nice to have
           build-args: NEXTCLOUD_VERSION=${{ needs.version.outputs.tag }}
