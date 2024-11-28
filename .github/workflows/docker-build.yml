@@ -32,7 +32,6 @@ jobs:
             sed -n '/[0-9]\+.[0-9]\+.[0-9]\+-fpm-alpine/p' | \
             sort --version-sort | \
             tail -n 1)
-          echo "tag: ${tag}"
           echo "tag=$tag" >> $GITHUB_OUTPUT
 
   docker_build:
@@ -66,4 +65,4 @@ jobs:
           push: true
           tags: latest
           # labels: nice to have
-          build-args: NEXTCLOUD_VERSION=${{ steps.version.outputs.tag }}
+          build-args: NEXTCLOUD_VERSION=${{ needs.version.outputs.tag }}
