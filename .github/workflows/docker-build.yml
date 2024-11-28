@@ -84,6 +84,6 @@ jobs:
           push: true
           tags: |
             zalf/fairagro-nextcloud-docker:latest
-            zalf/fairagro-nextcloud-docker:${{ needs.project_version.outputs.MajorMinorPatch }}-nc-${{ needs.nextcloud_version.outputs.tag }}
+            zalf/fairagro-nextcloud-docker:${{ needs.project_version.outputs.MajorMinorPatch }}-nc-${{ inputs.nextcloud_version }}
           # labels: nice to have
           build-args: NEXTCLOUD_VERSION=${{ inputs.nextcloud_version }}
