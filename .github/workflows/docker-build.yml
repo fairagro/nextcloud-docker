@@ -32,6 +32,7 @@ jobs:
       Major: ${{ steps.gitversion.outputs.Major }}
       Minor: ${{ steps.gitversion.outputs.Minor }}
       Patch: ${{ steps.gitversion.outputs.Patch }}
+      tag: ${{ needs.project_version.outputs.MajorMinorPatch }}-nc-${{ inputs.nextcloud_version }}
     steps:
       - name: Checkout git repo
         uses: actions/checkout@v4.2.2
@@ -59,10 +60,26 @@ jobs:
         # this the line above try to push the same tag a second time, which will fail.
         continue-on-error: true
 
+  check_tag:
+    runs-on: ubuntu-latest
+    needs:
+      - project_version
+    outputs:
+      does_not_exist: ${{ steps.check.outputs.does_not_exist }}
+    steps:
+      - id: check
+        name: Check if image already exists of dockerhub
+        shell: bash
+        run: |
+          does_not_exist=$(curl -I -L --fail "https://hub.docker.com/v2/repositories/zalf/fairagro-nextcloud-docker/tags/${{ needs.project_version.outputs.tag }}")
+          echo "does_not_exist=$does_not_exist" >> $GITHUB_OUTPUT
+
   docker_build:
     runs-on: ubuntu-latest
     needs:
       - project_version
+      - check_tag
+    if: needs.check_tag.outputs.does_not_exist != 0
     steps:
       - name: Checkout git repo
         uses: actions/checkout@v4.2.2
@@ -84,6 +101,6 @@ jobs:
           push: true
           tags: |
             zalf/fairagro-nextcloud-docker:latest
-            zalf/fairagro-nextcloud-docker:${{ needs.project_version.outputs.MajorMinorPatch }}-nc-${{ inputs.nextcloud_version }}
+            zalf/fairagro-nextcloud-docker:${{ needs.project_version.outputs.tag }}
           # labels: nice to have
           build-args: NEXTCLOUD_VERSION=${{ inputs.nextcloud_version }}
