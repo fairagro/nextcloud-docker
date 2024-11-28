@@ -74,7 +74,7 @@ jobs:
           curl -I -L --fail "https://hub.docker.com/v2/repositories/zalf/fairagro-nextcloud-docker/tags/${{ needs.project_version.outputs.tag }}"
           does_not_exist=$?
           echo "::notice please ignore any errors"
-          echo "::debug does_not_exist=$does_not_exist (0=does exist, otherwise=does not exist)"
+          echo "::notice does_not_exist=$does_not_exist (0=does exist, otherwise=does not exist)"
           echo "does_not_exist=$does_not_exist" >> $GITHUB_OUTPUT
         continue-on-error: true
 
