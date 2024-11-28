@@ -39,7 +39,7 @@ jobs:
   docker_build_call:
     runs-on: ubuntu-latest
     needs:
-      - project_version
+      - nextcloud_version
     steps:
       - name: call workflow docker-build
         uses: ./.github/workflows/docker-build.yml
