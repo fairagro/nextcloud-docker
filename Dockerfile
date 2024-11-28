@@ -10,4 +10,5 @@ RUN set -ex; \
     apk add --no-cache \
         postgresql16-client \
         imagemagick-svg \
-        bzip2-dev
+        bzip2-dev; \
+    docker-php-ext-install bz2
