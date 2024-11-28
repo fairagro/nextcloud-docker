@@ -8,8 +8,8 @@ LABEL version=${NEXTCLOUD_VERSION}
 # be able to build the docker image on different nextcloud versions.
 RUN set -ex; \
     apk add --no-cache \
-        postgresql16-client \
+        postgresql-client \
         imagemagick-svg \
         bzip2-dev \
-        php-pdo_pgsql; \
+        php-pgsql; \
     docker-php-ext-install bz2
