@@ -11,5 +11,6 @@ RUN set -ex; \
         postgresql-client \
         imagemagick-svg \
         bzip2-dev \
-        php-pgsql; \
-    docker-php-ext-install bz2
+        libpq-dev; \
+    docker-php-ext-install bz2; \
+    docker-php-ext-install pgsql
